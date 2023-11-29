@@ -14,7 +14,7 @@ app.use(json());
 
 app.use('/todos', router);
 
-mongoose.connect('mongodb://0.0.0.0:27017/todoListDb', { retryWrites: true, w: 'majority' });
+mongoose.connect('mongodb://0.0.0.0:27017/todoList', { retryWrites: true, w: 'majority' });
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
