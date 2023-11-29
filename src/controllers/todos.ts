@@ -31,7 +31,7 @@ export const createTodo: RequestHandler = async (req, res) => {
  */
 export const getTodos: RequestHandler = async (req, res) => {
   const { skip = 0, limit = 10, filter } = req.query;
-  const todos = await Todo.find().limit(limit).skip(skip).sort("-createdAt");
+  const todos = await Todo.find().limit(Number(limit)).skip(Number(skip)).sort("-createdAt");
   const response = new SuccessResponse({
     message: "Todos successfully fetched",
     data: todos,
@@ -61,7 +61,7 @@ export const updateTodo: RequestHandler = async (req, res) => {
   );
   const response = new SuccessResponse({
     message: "Todos successfully updated",
-    data: updatedData,
+    data: updatedData
   });
   return res.json(response);
 };
