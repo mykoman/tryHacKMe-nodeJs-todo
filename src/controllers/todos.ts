@@ -12,8 +12,8 @@ import Todo from "../models/todo";
  * @returns {Object}
  */
 export const createTodo: RequestHandler = async (req, res) => {
-  const { text } = req.body;
-  const todo = new Todo({ text });
+  const { text, completed } = req.body;
+  const todo = new Todo({ text, completed });
   await todo.save();
   const response = new SuccessResponse({
     message: "Todo successfully created",
@@ -30,7 +30,9 @@ export const createTodo: RequestHandler = async (req, res) => {
  * @returns {Object}
  */
 export const getTodos: RequestHandler = async (req, res) => {
-  const todos = await Todo.find();
+  const { skip = 0, limit = 10, filter } = req.query;
+  console.log("skip", skip, limit);
+  const todos = await Todo.find().limit(limit).skip(skip).sort("-createdAt");
   const response = new SuccessResponse({
     message: "Todos successfully fetched",
     data: todos,

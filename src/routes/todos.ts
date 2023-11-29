@@ -1,15 +1,21 @@
-import { Router } from 'express';
+import { Router } from "express";
 
-import { createTodo, getTodos, updateTodo, deleteTodo } from '../controllers/todos';
+import {
+  createTodo,
+  getTodos,
+  updateTodo,
+  deleteTodo,
+} from "../controllers/todos";
+import asyncWrapper from "../middlewares/asyncWrapper";
 
 const router = Router();
 
-router.post('/', createTodo);
+router.post("/", asyncWrapper(createTodo));
 
-router.get('/', getTodos);
+router.get("/", asyncWrapper(getTodos));
 
-router.patch('/:id', updateTodo);
+router.patch("/:id", asyncWrapper(updateTodo));
 
-router.delete('/:id', deleteTodo);
+router.delete("/:id", asyncWrapper(deleteTodo));
 
 export default router;

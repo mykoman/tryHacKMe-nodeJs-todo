@@ -19,6 +19,8 @@ const todoSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+}, {
+  timestamps: true
 });
 
 const Todo = mongoose.model<ITodo>('todos', todoSchema);

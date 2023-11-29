@@ -4,7 +4,7 @@ import { NextFunction, Request, Response } from 'express'
 
 config()
 
-export default (error, req: Request, res: Response, next: NextFunction) => {
+export default (error: Error, req: Request, res: Response, next: NextFunction) => {
     const isProduction = process.env.NODE_ENV === 'production'
     let errorMessages = {}
     if (res.headersSent) return next(error)
