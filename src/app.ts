@@ -8,14 +8,14 @@ import errorHandler from "./middlewares/errorHandler";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const dbUrl: string = process.env.DATABASE_URL!;
 
 app.use(cors());
 app.use(express.json());
 
 app.use(json());
 
-
-mongoose.connect("mongodb://0.0.0.0:27017/todoList", {
+mongoose.connect(dbUrl, {
   retryWrites: true,
   w: "majority",
 });
@@ -23,9 +23,6 @@ mongoose.connect("mongodb://0.0.0.0:27017/todoList", {
 app.use("/api/v1", router);
 app.use(errorHandler);
 app.use(requestLogger);
-
-
-
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

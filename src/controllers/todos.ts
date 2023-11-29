@@ -31,7 +31,10 @@ export const createTodo: RequestHandler = async (req, res) => {
  */
 export const getTodos: RequestHandler = async (req, res) => {
   const { skip = 0, limit = 10, filter } = req.query;
-  const todos = await Todo.find().limit(Number(limit)).skip(Number(skip)).sort("-createdAt");
+  const todos = await Todo.find()
+    .limit(Number(limit))
+    .skip(Number(skip))
+    .sort("-createdAt");
   const response = new SuccessResponse({
     message: "Todos successfully fetched",
     data: todos,

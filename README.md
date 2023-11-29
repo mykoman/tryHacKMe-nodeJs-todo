@@ -7,7 +7,6 @@
 - [Todo List API](#todo-list-api)
   - [Table of Contents](#table-of-contents)
   - [About the Project](#about-the-project)
-    - [Folder Structure](#folder-structure)
     - [Installation \& Usage](#installation--usage)
   - [Author](#author)
 
@@ -20,7 +19,6 @@ This is a RESTful API for a todo list. Part of an assessment for TryHackMe. It a
 -   Update a todo item 
 -   Delete a todo item 
 
-### Folder Structure
 
 ```bash
 
@@ -86,6 +84,7 @@ git clone https://github.com/mykoman/tryHacKMe-nodeJs-todo.git
 
 - create database to store data eg todoList.
 - Create an empty collection alongside. You can can call it todos
+- use the .env.example file to create your own .env file and set the respective parameters to use 
 
 
 
