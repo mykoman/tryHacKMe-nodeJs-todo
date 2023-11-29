@@ -31,7 +31,6 @@ export const createTodo: RequestHandler = async (req, res) => {
  */
 export const getTodos: RequestHandler = async (req, res) => {
   const { skip = 0, limit = 10, filter } = req.query;
-  console.log("skip", skip, limit);
   const todos = await Todo.find().limit(limit).skip(skip).sort("-createdAt");
   const response = new SuccessResponse({
     message: "Todos successfully fetched",
@@ -47,7 +46,7 @@ export const getTodos: RequestHandler = async (req, res) => {
  * @param {Object} res
  * @returns {Object}
  */
-export const updateTodo: RequestHandler<{ id: string }> = async (req, res) => {
+export const updateTodo: RequestHandler = async (req, res) => {
   const { id } = req.params;
   const { completed, text } = req.body;
 
@@ -62,7 +61,7 @@ export const updateTodo: RequestHandler<{ id: string }> = async (req, res) => {
   );
   const response = new SuccessResponse({
     message: "Todos successfully updated",
-    data: todo,
+    data: updatedData,
   });
   return res.json(response);
 };
@@ -76,6 +75,10 @@ export const updateTodo: RequestHandler<{ id: string }> = async (req, res) => {
  */
 export const deleteTodo: RequestHandler = async (req, res) => {
   const { id } = req.params;
+  const todo = await Todo.findById(id);
+  if (!todo) {
+    throw new ApplicationError(400, "Todo item not found");
+  }
   await Todo.findByIdAndDelete(id);
   const response = new SuccessResponse({
     message: "Todo successfully deleted",
